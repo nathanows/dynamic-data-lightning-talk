@@ -1,0 +1,17 @@
+#!/bin/sh
+chmod a+x ~/.zshrc
+source ~/.zshrc
+
+echo "Starting lightning talk rails servers"
+cd flex-data-sql && tab bundle exec rails server -p 3333
+cd ../flex-data-hstore && tab bundle exec rails server -p 4444
+tab mongod
+cd ../flex-data-mongo && tab bundle exec rails server -p 5555
+sleep 6
+open http://localhost:3333/users/1
+open http://localhost:4444/users/1
+open http://localhost:5555/users/nathanows
+echo "Servers started..."
+echo "SQL: http://localhost:3333"
+echo "HStore: http://localhost:4444"
+echo "Mongo: http://localhost:5555"
